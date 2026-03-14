@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Ecozen - Limpieza que cuida</title>
+  <meta name="description" content="Lavandería y distribuidora de detergentes en Ixtlahuaca. Agenda recolección y entrega a domicilio." />
+  <meta name="theme-color" content="#10b981" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <style>
+    :root{
+      --green:#10b981; --green2:#0f766e; --dark:#0f172a; --muted:#64748b; --bg:#f1f5f9; --card:#ffffff;
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg); color:var(--dark);
+    }
+    .phone{
+      max-width:430px; margin:0 auto; min-height:100dvh; background:#fff; position:relative;
+      box-shadow:0 8px 30px rgba(0,0,0,.08);
+    }
+    header{
+      position:sticky; top:0; backdrop-filter:saturate(180%) blur(10px); background:rgba(255,255,255,.92);
+      border-bottom:1px solid #e2e8f0; z-index:10;
+    }
+    .wrap{padding:18px}
+    .brand{display:flex; align-items:center; justify-content:space-between}
+    .logo{
+      width:46px;height:46px;border-radius:18px;background:var(--green);display:grid;place-items:center;color:#fff;font-size:23px;
+      box-shadow:0 10px 24px rgba(16,185,129,.35)
+    }
+    .eyebrow{font-size:11px; text-transform:uppercase; letter-spacing:.18em; color:var(--green); font-weight:700}
+    h1,h2,h3,p{margin:0}
+    .hero{
+      margin:18px; padding:22px; border-radius:32px; color:#fff;
+      background:linear-gradient(135deg,var(--green),#14b8a6,#0284c7);
+      box-shadow:0 18px 35px rgba(2,132,199,.18);
+    }
+    .hero h2{font-size:32px; line-height:1.05; margin-top:8px}
+    .sub{margin-top:12px; color:rgba(255,255,255,.92); line-height:1.55; font-size:14px}
+    .mini-grid,.quick-grid,.service-list,.steps,.stack{display:grid; gap:12px}
+    .mini-grid{grid-template-columns:1fr 1fr; margin-top:16px}
+    .mini{
+      background:rgba(255,255,255,.14); padding:14px; border-radius:20px; border:1px solid rgba(255,255,255,.12)
+    }
+    .mini small{display:block; color:rgba(255,255,255,.75); margin-bottom:4px}
+    .price{
+      margin-top:14px; border-radius:20px; background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.12); padding:16px;
+    }
+    .price .big{font-size:30px; font-weight:800; margin-top:2px}
+    .btn,.btn-outline,.wa{
+      display:flex; align-items:center; justify-content:center; gap:10px; text-decoration:none;
+      border-radius:20px; padding:14px 16px; font-weight:700; border:none; cursor:pointer; font-size:15px;
+    }
+    .btn{background:#fff;color:var(--green2); margin-top:14px}
+    .section{padding:4px 18px 16px}
+    .section h3{font-size:17px}
+    .quick-grid{grid-template-columns:1fr 1fr; margin-top:12px}
+    .quick,.card,.dark-card,.soft-card{
+      border-radius:24px; padding:16px; border:1px solid #e2e8f0; background:#fff;
+      box-shadow:0 6px 18px rgba(15,23,42,.04)
+    }
+    .quick{background:#f8fafc; text-decoration:none; color:inherit}
+    .quick .icon,.service-icon{
+      width:42px;height:42px;border-radius:16px;display:grid;place-items:center;background:#d1fae5;color:#047857;font-size:20px
+    }
+    .quick span{display:block; margin-top:10px; font-weight:700; font-size:14px; line-height:1.35}
+    .soft-card{background:#ecfdf5; border-color:#d1fae5}
+    .soft-card .inline{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .soft-card strong{font-size:32px}
+    .service-list,.steps,.stack{margin-top:12px}
+    .service{display:flex; gap:14px}
+    .service h4{margin:0; font-size:16px}
+    .service p{margin-top:4px; color:var(--muted); line-height:1.5; font-size:14px}
+    .dark-card{background:var(--dark); color:#fff; border:none}
+    .dark-card p{color:#cbd5e1}
+    .muted{color:var(--muted)}
+    .step{display:flex; gap:14px; align-items:flex-start}
+    .num{
+      min-width:36px;height:36px;border-radius:999px;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:800
+    }
+    .form input,.form select,.form textarea{
+      width:100%; border-radius:18px; border:1px solid #e2e8f0; background:#f8fafc; padding:14px 15px; font:inherit;
+    }
+    .form .row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .form textarea{min-height:100px; resize:vertical}
+    .btn-primary{background:var(--green); color:#fff}
+    .btn-outline{background:#fff; color:var(--dark); border:1px solid #e2e8f0}
+    .bottom{
+      position:sticky; bottom:0; background:rgba(255,255,255,.96); backdrop-filter:blur(8px);
+      border-top:1px solid #e2e8f0; padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+    }
+    .nav{display:grid; grid-template-columns:repeat(4,1fr); gap:8px}
+    .nav a{display:grid; place-items:center; gap:4px; text-decoration:none; color:#64748b; font-size:11px; font-weight:700}
+    .nav a.active{color:var(--green)}
+    .install-banner{display:none; margin:0 18px 14px; padding:12px; background:#ecfeff; border:1px solid #bae6fd; border-radius:18px}
+    .install-banner.show{display:block}
+    .note{font-size:13px; line-height:1.55}
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <header>
+      <div class="wrap brand">
+        <div>
+          <div class="eyebrow">Ecozen</div>
+          <h1>Limpieza que cuida</h1>
+        </div>
+        <div class="logo">🧺</div>
+      </div>
+    </header>
+
+    <section class="hero" id="inicio">
+      <p>Lavandería y distribuidora de detergentes</p>
+      <h2>Lavado y entrega hasta tu puerta</h2>
+      <p class="sub">Solicita recolección, revisa servicios y agenda en minutos desde tu celular.</p>
+
+      <div class="mini-grid">
+        <div class="mini"><small>Cobertura</small><strong>Ixtlahuaca + 5 km</strong></div>
+        <div class="mini"><small>Horario</small><strong>9:00 a 18:00</strong></div>
+      </div>
+
+      <div class="price">
+        <small style="color:rgba(255,255,255,.78)">Precio base</small>
+        <div class="big">$17 por kilo</div>
+      </div>
+
+      <a class="btn" href="#agenda">🚚 Agendar recolección</a>
+    </section>
+
+    <div class="install-banner" id="installBanner">
+      <div class="note">
+        <strong>Instala Ecozen</strong><br />
+        Toca el botón para agregar esta app a tu pantalla de inicio.
+      </div>
+      <button class="btn btn-primary" id="installBtn" style="margin-top:10px;width:100%">Instalar app</button>
+    </div>
+
+    <section class="section">
+      <h3>Acciones rápidas</h3>
+      <div class="quick-grid">
+        <a class="quick" href="#agenda"><div class="icon">🚚</div><span>Pedir recolección</span></a>
+        <a class="quick" href="#servicios"><div class="icon">🧴</div><span>Ver servicios</span></a>
+        <a class="quick" href="#cobertura"><div class="icon">📍</div><span>Cobertura</span></a>
+        <a class="quick" href="#instalar"><div class="icon">📲</div><span>Instalar app</span></a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="soft-card">
+        <div class="inline">
+          <div>
+            <div style="color:#047857;font-weight:700;font-size:14px">Precio principal</div>
+            <strong>$17/kg</strong>
+          </div>
+          <a class="btn btn-primary" style="margin:0" href="#agenda">Pedir ahora</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="servicios">
+      <h3>Servicios destacados</h3>
+      <div class="service-list">
+        <div class="card service">
+          <div class="service-icon">👕</div>
+          <div><h4>Lavado por kilo</h4><p>Para ropa del día a día con entrega cómoda y atención rápida.</p></div>
+        </div>
+        <div class="card service">
+          <div class="service-icon">📦</div>
+          <div><h4>Lavado por encargo</h4><p>Atención especial para prendas o lotes que requieren trato personalizado.</p></div>
+        </div>
+        <div class="card service">
+          <div class="service-icon">🛏️</div>
+          <div><h4>Edredones y cobijas</h4><p>Lavado profundo para prendas voluminosas y blancos pesados.</p></div>
+        </div>
+        <div class="card service">
+          <div class="service-icon">🧺</div>
+          <div><h4>Sábanas y frazadas</h4><p>Limpieza fresca y completa para tu ropa de cama.</p></div>
+        </div>
+        <div class="card service">
+          <div class="service-icon">🧥</div>
+          <div><h4>Chamarras</h4><p>Lavado cuidadoso según el tipo de tela y uso de la prenda.</p></div>
+        </div>
+        <div class="card service">
+          <div class="service-icon">🧴</div>
+          <div><h4>Detergentes</h4><p>Distribución de detergentes para hogar y negocio.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cobertura">
+      <div class="dark-card">
+        <h3>Zona de cobertura</h3>
+        <p style="margin-top:8px">Ixtlahuaca centro, terminal y hasta 5 km a la redonda para recolección y entrega de ropa.</p>
+      </div>
+    </section>
+
+    <section class="section" id="horarios">
+      <div class="card">
+        <h3>Horario de atención</h3>
+        <p style="margin-top:8px" class="muted">Disponible todos los días</p>
+        <p style="font-size:28px;font-weight:800;margin-top:12px">9:00 a 18:00</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h3>Cómo funciona</h3>
+      <div class="steps">
+        <div class="card step"><div class="num">1</div><div>El cliente agenda desde su celular.</div></div>
+        <div class="card step"><div class="num">2</div><div>Ecozen recoge la ropa en domicilio.</div></div>
+        <div class="card step"><div class="num">3</div><div>Se lava con cuidado y se prepara el pedido.</div></div>
+        <div class="card step"><div class="num">4</div><div>La ropa limpia se entrega hasta su puerta.</div></div>
+      </div>
+    </section>
+
+    <section class="section" id="agenda">
+      <div class="card">
+        <h3>Agenda tu recolección</h3>
+        <p class="muted" style="margin-top:4px">Versión tipo app para hacer pedidos rápidos</p>
+
+        <form class="form stack" id="pickupForm">
+          <input name="nombre" placeholder="Nombre completo" required />
+          <input name="telefono" placeholder="Teléfono" required />
+          <input name="direccion" placeholder="Dirección completa" required />
+          <select name="servicio" required>
+            <option value="">Selecciona un servicio</option>
+            <option>Lavado por kilo</option>
+            <option>Lavado por encargo</option>
+            <option>Edredones y cobijas</option>
+            <option>Sábanas y frazadas</option>
+            <option>Chamarras</option>
+            <option>Detergentes</option>
+          </select>
+          <div class="row">
+            <input name="fecha" type="date" />
+            <input name="hora" type="time" />
+          </div>
+          <textarea name="notas" placeholder="Notas adicionales"></textarea>
+
+          <button type="submit" class="btn btn-primary">Confirmar solicitud por WhatsApp</button>
+          <a class="btn-outline wa" href="https://wa.me/527223652560?text=Hola,%20me%20gustar%C3%ADa%20solicitar%20su%20servicio%20de%20lavado">WhatsApp 722 365 2560</a>
+          <a class="btn-outline wa" href="https://wa.me/527226385227?text=Hola,%20me%20gustar%C3%ADa%20solicitar%20su%20servicio%20de%20lavado">WhatsApp 722 638 5227</a>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="instalar">
+      <div class="dark-card">
+        <h3>Instalar Ecozen en tu celular</h3>
+        <div class="stack" style="margin-top:12px">
+          <div class="card" style="background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.08); color:#fff">1. Abre la página desde Chrome o Safari.</div>
+          <div class="card" style="background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.08); color:#fff">2. Toca “Agregar a pantalla de inicio”.</div>
+          <div class="card" style="background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.08); color:#fff">3. Usa Ecozen como si fuera una app.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="bottom">
+      <nav class="nav">
+        <a href="#inicio" class="active">🏠<span>Inicio</span></a>
+        <a href="#servicios">🧴<span>Servicios</span></a>
+        <a href="#agenda">🚚<span>Agenda</span></a>
+        <a href="#horarios">⏰<span>Horario</span></a>
+      </nav>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

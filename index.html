@@ -3,274 +3,366 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Ecozen - Limpieza que cuida</title>
-  <meta name="description" content="Lavandería y distribuidora de detergentes en Ixtlahuaca. Agenda recolección y entrega a domicilio." />
+  <title>Ecozen Operaciones</title>
+  <meta name="description" content="Lavandería, registro de pedidos, modo repartidor y catálogo de detergentes en una sola app." />
   <meta name="theme-color" content="#10b981" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icon-192.png" />
   <link rel="apple-touch-icon" href="icon-192.png" />
   <style>
     :root{
-      --green:#10b981; --green2:#0f766e; --dark:#0f172a; --muted:#64748b; --bg:#f1f5f9; --card:#ffffff;
+      --green:#10b981;
+      --green-dark:#047857;
+      --teal:#0f766e;
+      --blue:#0ea5e9;
+      --dark:#0f172a;
+      --muted:#64748b;
+      --line:#e2e8f0;
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --warning:#f59e0b;
+      --danger:#ef4444;
+      --ok:#16a34a;
+      --shadow:0 18px 45px rgba(15,23,42,.08);
       --radius:24px;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{
-      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:var(--bg); color:var(--dark);
-    }
-    .phone{
-      max-width:430px; margin:0 auto; min-height:100dvh; background:#fff; position:relative;
-      box-shadow:0 8px 30px rgba(0,0,0,.08);
-    }
-    header{
-      position:sticky; top:0; backdrop-filter:saturate(180%) blur(10px); background:rgba(255,255,255,.92);
-      border-bottom:1px solid #e2e8f0; z-index:10;
-    }
-    .wrap{padding:18px}
-    .brand{display:flex; align-items:center; justify-content:space-between}
-    .logo{
-      width:46px;height:46px;border-radius:18px;background:var(--green);display:grid;place-items:center;color:#fff;font-size:23px;
-      box-shadow:0 10px 24px rgba(16,185,129,.35)
-    }
-    .eyebrow{font-size:11px; text-transform:uppercase; letter-spacing:.18em; color:var(--green); font-weight:700}
-    h1,h2,h3,p{margin:0}
-    .hero{
-      margin:18px; padding:22px; border-radius:32px; color:#fff;
-      background:linear-gradient(135deg,var(--green),#14b8a6,#0284c7);
-      box-shadow:0 18px 35px rgba(2,132,199,.18);
-    }
-    .hero h2{font-size:32px; line-height:1.05; margin-top:8px}
-    .sub{margin-top:12px; color:rgba(255,255,255,.92); line-height:1.55; font-size:14px}
-    .mini-grid,.quick-grid,.service-list,.steps,.stack{display:grid; gap:12px}
-    .mini-grid{grid-template-columns:1fr 1fr; margin-top:16px}
-    .mini{
-      background:rgba(255,255,255,.14); padding:14px; border-radius:20px; border:1px solid rgba(255,255,255,.12)
-    }
-    .mini small{display:block; color:rgba(255,255,255,.75); margin-bottom:4px}
-    .price{
-      margin-top:14px; border-radius:20px; background:rgba(255,255,255,.12);
-      border:1px solid rgba(255,255,255,.12); padding:16px;
-    }
-    .price .big{font-size:30px; font-weight:800; margin-top:2px}
-    .btn,.btn-outline,.wa{
-      display:flex; align-items:center; justify-content:center; gap:10px; text-decoration:none;
-      border-radius:20px; padding:14px 16px; font-weight:700; border:none; cursor:pointer; font-size:15px;
-    }
-    .btn{background:#fff;color:var(--green2); margin-top:14px}
-    .section{padding:4px 18px 16px}
-    .section h3{font-size:17px}
-    .quick-grid{grid-template-columns:1fr 1fr; margin-top:12px}
-    .quick,.card,.dark-card,.soft-card{
-      border-radius:24px; padding:16px; border:1px solid #e2e8f0; background:#fff;
-      box-shadow:0 6px 18px rgba(15,23,42,.04)
-    }
-    .quick{background:#f8fafc; text-decoration:none; color:inherit}
-    .quick .icon,.service-icon{
-      width:42px;height:42px;border-radius:16px;display:grid;place-items:center;background:#d1fae5;color:#047857;font-size:20px
-    }
-    .quick span{display:block; margin-top:10px; font-weight:700; font-size:14px; line-height:1.35}
-    .soft-card{background:#ecfdf5; border-color:#d1fae5}
-    .soft-card .inline{display:flex; align-items:center; justify-content:space-between; gap:10px}
-    .soft-card strong{font-size:32px}
-    .service-list,.steps,.stack{margin-top:12px}
-    .service{display:flex; gap:14px}
-    .service h4{margin:0; font-size:16px}
-    .service p{margin-top:4px; color:var(--muted); line-height:1.5; font-size:14px}
-    .dark-card{background:var(--dark); color:#fff; border:none}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#effcf7,#f8fafc 35%,#eef6ff 100%);color:var(--dark)}
+    a{color:inherit}
+    button,input,select,textarea{font:inherit}
+    img{max-width:100%;display:block}
+    .phone{max-width:440px;margin:0 auto;min-height:100dvh;background:#fff;box-shadow:var(--shadow);position:relative}
+    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .wrap{padding:16px 18px}
+    .brand{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand-meta{display:flex;flex-direction:column;gap:4px}
+    .eyebrow{font-size:11px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--green-dark)}
+    .top-note{font-size:12px;color:var(--muted)}
+    h1,h2,h3,h4,p{margin:0}
+    .logo{width:50px;height:50px;border-radius:18px;background:linear-gradient(135deg,var(--green),var(--blue));display:grid;place-items:center;color:#fff;font-size:24px;box-shadow:0 14px 28px rgba(16,185,129,.28)}
+
+    .hero{margin:18px;padding:24px;border-radius:32px;background:linear-gradient(135deg,var(--green),var(--teal),var(--blue));color:#fff;box-shadow:0 20px 40px rgba(14,165,233,.18)}
+    .hero h2{font-size:30px;line-height:1.05;margin-top:10px}
+    .hero p{line-height:1.55}
+    .sub{margin-top:12px;color:rgba(255,255,255,.94);font-size:14px}
+    .pill-row,.stats,.grid-2,.stack,.chips,.catalog-grid,.orders-list,.faq-list,.driver-grid{display:grid;gap:12px}
+    .pill-row{grid-template-columns:repeat(3,1fr);margin-top:16px}
+    .pill,.chip{padding:10px 12px;border-radius:999px;font-size:12px;font-weight:800;text-align:center}
+    .pill{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.16)}
+    .stats{grid-template-columns:1fr 1fr;margin-top:16px}
+    .stat{padding:14px;border-radius:20px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.16)}
+    .stat small{display:block;color:rgba(255,255,255,.75);margin-bottom:4px}
+    .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+    .btn,.btn-outline,.btn-soft,.tab-btn{display:flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:18px;padding:14px 16px;text-decoration:none;font-weight:800;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease, background .18s ease}
+    .btn:active,.btn-outline:active,.btn-soft:active,.tab-btn:active{transform:scale(.98)}
+    .btn{background:#fff;color:var(--teal)}
+    .btn-outline{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.18)}
+    .btn-soft{background:#ecfdf5;color:var(--green-dark);border:1px solid #bbf7d0}
+
+    .section{padding:4px 18px 16px;scroll-margin-top:82px}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:12px}
+    .section-head p{font-size:13px;color:var(--muted)}
+    .card,.soft-card,.dark-card,.order-card,.catalog-card,.faq-item,.tab-shell{background:#fff;border:1px solid var(--line);border-radius:24px;padding:16px;box-shadow:0 8px 20px rgba(15,23,42,.04)}
+    .soft-card{background:#f0fdf4;border-color:#bbf7d0}
+    .dark-card{background:var(--dark);border:none;color:#fff}
     .dark-card p{color:#cbd5e1}
+    .grid-2{grid-template-columns:1fr 1fr}
+    .mini-box{padding:14px;border-radius:20px;background:#f8fafc;border:1px solid var(--line)}
+    .mini-box strong{display:block;font-size:24px;margin-top:4px}
+    .helper{font-size:12px;color:var(--muted);line-height:1.5}
     .muted{color:var(--muted)}
-    .step{display:flex; gap:14px; align-items:flex-start}
-    .num{
-      min-width:36px;height:36px;border-radius:999px;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:800
-    }
-    .form input,.form select,.form textarea{
-      width:100%; border-radius:18px; border:1px solid #e2e8f0; background:#f8fafc; padding:14px 15px; font:inherit;
-    }
-    .form .row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
-    .form textarea{min-height:100px; resize:vertical}
-    .btn-primary{background:var(--green); color:#fff}
-    .btn-outline{background:#fff; color:var(--dark); border:1px solid #e2e8f0}
-    .bottom{
-      position:sticky; bottom:0; background:rgba(255,255,255,.96); backdrop-filter:blur(8px);
-      border-top:1px solid #e2e8f0; padding:10px 12px calc(10px + env(safe-area-inset-bottom));
-    }
-    .nav{display:grid; grid-template-columns:repeat(4,1fr); gap:8px}
-    .nav a{display:grid; place-items:center; gap:4px; text-decoration:none; color:#64748b; font-size:11px; font-weight:700}
-    .nav a.active{color:var(--green)}
-    .install-banner{display:none; margin:0 18px 14px; padding:12px; background:#ecfeff; border:1px solid #bae6fd; border-radius:18px}
+    .label{display:block;font-size:13px;font-weight:800;margin:2px 0 8px}
+    .form input,.form select,.form textarea{width:100%;background:#f8fafc;border:1px solid var(--line);border-radius:18px;padding:14px 15px;color:var(--dark)}
+    .form textarea{min-height:94px;resize:vertical}
+    .form input:focus,.form select:focus,.form textarea:focus{outline:2px solid rgba(16,185,129,.18);border-color:var(--green)}
+    .form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .estimate{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:14px 16px;border-radius:18px;background:#f8fafc;border:1px dashed #cbd5e1}
+    .estimate strong{font-size:24px}
+    .status{display:none;margin-top:10px;padding:12px 14px;border-radius:16px;font-size:13px;line-height:1.5;border:1px solid transparent}
+    .status.show{display:block}.status.ok{background:#ecfdf5;color:#065f46;border-color:#a7f3d0}.status.warn{background:#fff7ed;color:#9a3412;border-color:#fdba74}.status.info{background:#eff6ff;color:#1d4ed8;border-color:#93c5fd}
+    .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+    .tab-btn{background:#f8fafc;color:var(--muted);border:1px solid var(--line);padding:12px}
+    .tab-btn.active{background:#ecfdf5;color:var(--green-dark);border-color:#86efac}
+    .tab-panel{display:none}.tab-panel.active{display:block}
+    .chips{grid-template-columns:repeat(4,1fr)}
+    .chip{background:#f8fafc;border:1px solid var(--line);color:#334155;cursor:pointer}
+    .chip.active{background:#dcfce7;border-color:#86efac;color:#166534}
+    .summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .summary-item{background:#f8fafc;border:1px solid var(--line);border-radius:18px;padding:12px;text-align:center}
+    .summary-item strong{display:block;font-size:20px;margin-top:4px}
+    .orders-list{margin-top:12px}
+    .order-card{display:grid;gap:12px}
+    .order-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+    .order-title{font-size:16px;font-weight:900}
+    .badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:8px 10px;font-size:12px;font-weight:900}
+    .badge.nuevo{background:#dbeafe;color:#1d4ed8}
+    .badge.recoleccion{background:#fef3c7;color:#92400e}
+    .badge.proceso{background:#ede9fe;color:#6d28d9}
+    .badge.ruta{background:#cffafe;color:#155e75}
+    .badge.entregado{background:#dcfce7;color:#166534}
+    .badge.cancelado{background:#fee2e2;color:#b91c1c}
+    .order-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px;color:#334155}
+    .order-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .order-actions .btn-soft,.order-actions .btn-outline{padding:12px}
+    .toolbar{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .catalog-grid{grid-template-columns:1fr 1fr}
+    .catalog-card h4{font-size:16px}
+    .catalog-card p{margin-top:6px;color:var(--muted);font-size:13px;line-height:1.5}
+    .price-line{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-top:12px;font-weight:900}
+    .stock{font-size:12px;font-weight:800;color:#166534;background:#dcfce7;border-radius:999px;padding:7px 9px;display:inline-flex}
+    .faq-item summary{cursor:pointer;font-weight:900;list-style:none}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item p{margin-top:8px;color:var(--muted);line-height:1.55;font-size:14px}
+    .install-banner{display:none;margin:0 18px 14px;padding:12px;border-radius:18px;background:#ecfeff;border:1px solid #bae6fd}
     .install-banner.show{display:block}
-    .note{font-size:13px; line-height:1.55}
+    .bottom{position:sticky;bottom:0;z-index:40;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
+    .nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .nav a{display:grid;place-items:center;gap:4px;padding:6px;border-radius:14px;text-decoration:none;color:var(--muted);font-size:11px;font-weight:900}
+    .nav a.active{background:#ecfdf5;color:var(--green-dark)}
+    .footer-space{height:10px}
+    @media (max-width:370px){.pill-row,.stats,.grid-2,.form .row,.catalog-grid,.summary-grid,.chips,.toolbar,.hero-actions,.order-meta,.order-actions{grid-template-columns:1fr}.hero h2{font-size:27px}}
   </style>
 </head>
 <body>
   <div class="phone">
     <header>
       <div class="wrap brand">
-        <div>
-          <div class="eyebrow">Ecozen</div>
-          <h1>Limpieza que cuida</h1>
+        <div class="brand-meta">
+          <div class="eyebrow">Ecozen Operaciones</div>
+          <h1>Lavandería y reparto</h1>
+          <div class="top-note">Cliente, negocio y repartidor en una sola app</div>
         </div>
-        <div class="logo">🧺</div>
+        <div class="logo" aria-hidden="true">🧺</div>
       </div>
     </header>
 
     <section class="hero" id="inicio">
-      <p>Lavandería y distribuidora de detergentes</p>
-      <h2>Lavado y entrega hasta tu puerta</h2>
-      <p class="sub">Solicita recolección, revisa servicios y agenda en minutos desde tu celular.</p>
-
-      <div class="mini-grid">
-        <div class="mini"><small>Cobertura</small><strong>Ixtlahuaca + 5 km</strong></div>
-        <div class="mini"><small>Horario</small><strong>9:00 a 18:00</strong></div>
+      <p>Lavado, detergentes y control de pedidos</p>
+      <h2>Registra órdenes y deja una vista útil para tu hermano repartidor</h2>
+      <p class="sub">Esta versión ya guarda pedidos, los clasifica por negocio, permite cambiar estado y muestra un catálogo de detergentes disponible para venta o recomendación.</p>
+      <div class="pill-row">
+        <div class="pill">Pedidos locales</div>
+        <div class="pill">Modo repartidor</div>
+        <div class="pill">PWA instalable</div>
       </div>
-
-      <div class="price">
-        <small style="color:rgba(255,255,255,.78)">Precio base</small>
-        <div class="big">$17 por kilo</div>
+      <div class="stats">
+        <div class="stat"><small>Precio base</small><strong>$17 por kilo</strong></div>
+        <div class="stat"><small>Operación</small><strong>9:00 a 18:00</strong></div>
       </div>
-
-      <a class="btn" href="#agenda">🚚 Agendar recolección</a>
+      <div class="hero-actions">
+        <a class="btn" href="#operacion">📋 Ver operación</a>
+        <a class="btn-outline" href="#detergentes">🧴 Ver detergentes</a>
+      </div>
     </section>
 
-    <div class="install-banner" id="installBanner">
-      <div class="note">
-        <strong>Instala Ecozen</strong><br />
-        Toca el botón para agregar esta app a tu pantalla de inicio.
-      </div>
-      <button class="btn btn-primary" id="installBtn" style="margin-top:10px;width:100%">Instalar app</button>
+    <div id="installBanner" class="install-banner" role="status" aria-live="polite">
+      <strong>Instala la app</strong>
+      <div id="installHelp" class="helper" style="margin:8px 0 10px">Guárdala en la pantalla de inicio para usarla como app.</div>
+      <button id="installBtn" class="btn-soft" type="button">Instalar ahora</button>
     </div>
 
     <section class="section">
-      <h3>Acciones rápidas</h3>
-      <div class="quick-grid">
-        <a class="quick" href="#agenda"><div class="icon">🚚</div><span>Pedir recolección</span></a>
-        <a class="quick" href="#servicios"><div class="icon">🧴</div><span>Ver servicios</span></a>
-        <a class="quick" href="#cobertura"><div class="icon">📍</div><span>Cobertura</span></a>
-        <a class="quick" href="#instalar"><div class="icon">📲</div><span>Instalar app</span></a>
+      <div class="grid-2">
+        <div class="soft-card">
+          <div class="helper">Lo que ya resuelve esta versión</div>
+          <h3 style="margin-top:6px">Backend ligero</h3>
+          <p class="muted" style="margin-top:8px;line-height:1.55">Usa persistencia local para guardar pedidos, clientes y estados sin depender de servidor.</p>
+        </div>
+        <div class="dark-card">
+          <div class="helper" style="color:#93c5fd">Siguiente migración natural</div>
+          <h3 style="margin-top:6px">Sincronización real</h3>
+          <p style="margin-top:8px">Cuando quieras compartir pedidos entre celulares, lo ideal es migrar esta misma estructura a Firebase o Supabase.</p>
+        </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="soft-card">
-        <div class="inline">
-          <div>
-            <div style="color:#047857;font-weight:700;font-size:14px">Precio principal</div>
-            <strong>$17/kg</strong>
+    <section class="section" id="operacion">
+      <div class="section-head">
+        <h3>Centro de operación</h3>
+        <p>Captura, monitoreo y reparto</p>
+      </div>
+      <div class="tab-shell">
+        <div class="tabs" role="tablist" aria-label="Vistas principales">
+          <button class="tab-btn active" type="button" data-tab="captura">Captura</button>
+          <button class="tab-btn" type="button" data-tab="pedidos">Pedidos</button>
+          <button class="tab-btn" type="button" data-tab="repartidor">Repartidor</button>
+        </div>
+
+        <div class="tab-panel active" id="tab-captura">
+          <form id="pickupForm" class="form stack">
+            <div class="row">
+              <div>
+                <label class="label" for="nombre">Nombre del cliente</label>
+                <input id="nombre" name="nombre" placeholder="Ej. Ana López" required />
+              </div>
+              <div>
+                <label class="label" for="negocio">Negocio o referencia</label>
+                <input id="negocio" name="negocio" placeholder="Ej. Casa / Hotel / Cafetería" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label class="label" for="telefono">Teléfono</label>
+                <input id="telefono" name="telefono" inputmode="tel" placeholder="722..." required />
+              </div>
+              <div>
+                <label class="label" for="servicio">Servicio</label>
+                <select id="servicio" name="servicio" required>
+                  <option value="">Selecciona</option>
+                  <option>Lavado por kilo</option>
+                  <option>Lavado y doblado</option>
+                  <option>Lavado urgente</option>
+                  <option>Pedido de detergentes</option>
+                  <option>Servicio mixto</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="label" for="direccion">Dirección de recolección o entrega</label>
+              <textarea id="direccion" name="direccion" placeholder="Calle, colonia, referencias y punto de entrega" required></textarea>
+            </div>
+
+            <div class="row">
+              <div>
+                <label class="label" for="kilos">Kilos aproximados</label>
+                <input id="kilos" name="kilos" type="number" min="0" step="0.5" placeholder="Ej. 5" />
+              </div>
+              <div>
+                <label class="label" for="detergente">Detergente sugerido o pedido</label>
+                <select id="detergente" name="detergente">
+                  <option value="">Sin detergente</option>
+                  <option>Detergente Ecozen Floral 1L</option>
+                  <option>Detergente Ecozen Neutro 5L</option>
+                  <option>Suavizante Brisa Azul 1L</option>
+                  <option>Quitamanchas Oxi Plus 500ml</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label class="label" for="fecha">Fecha solicitada</label>
+                <input id="fecha" name="fecha" type="date" />
+              </div>
+              <div>
+                <label class="label" for="hora">Hora solicitada</label>
+                <input id="hora" name="hora" type="time" />
+              </div>
+            </div>
+
+            <div>
+              <label class="label" for="notas">Notas</label>
+              <textarea id="notas" name="notas" placeholder="Ej. separar blancos, tocar la puerta, pedido del negocio, etc."></textarea>
+            </div>
+
+            <div class="estimate">
+              <div>
+                <div class="helper">Estimado base del pedido</div>
+                <strong id="estimatedTotal">$0</strong>
+              </div>
+              <div class="helper">No incluye cargos especiales ni detergentes adicionales.</div>
+            </div>
+
+            <div class="row">
+              <button class="btn-soft" type="submit">💾 Guardar pedido</button>
+              <button class="btn-outline" id="clearFormBtn" type="button">Limpiar formulario</button>
+            </div>
+
+            <div class="row">
+              <button class="btn-soft" id="sendWhatsAppBtn" type="button">💬 Enviar a WhatsApp</button>
+              <button class="btn-outline" id="loadDemoBtn" type="button">Cargar pedidos demo</button>
+            </div>
+
+            <div id="formStatus" class="status" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+
+        <div class="tab-panel" id="tab-pedidos">
+          <div class="stack">
+            <div class="summary-grid" id="summaryGrid"></div>
+            <div class="toolbar">
+              <select id="statusFilter" aria-label="Filtrar por estado">
+                <option value="todos">Todos los estados</option>
+                <option value="nuevo">Nuevos</option>
+                <option value="recoleccion">Pendiente de recolección</option>
+                <option value="proceso">En proceso</option>
+                <option value="ruta">En ruta</option>
+                <option value="entregado">Entregados</option>
+                <option value="cancelado">Cancelados</option>
+              </select>
+              <input id="businessFilter" placeholder="Filtrar por cliente o negocio" />
+            </div>
+            <div id="ordersList" class="orders-list"></div>
           </div>
-          <a class="btn btn-primary" style="margin:0" href="#agenda">Pedir ahora</a>
         </div>
-      </div>
-    </section>
 
-    <section class="section" id="servicios">
-      <h3>Servicios destacados</h3>
-      <div class="service-list">
-        <div class="card service">
-          <div class="service-icon">👕</div>
-          <div><h4>Lavado por kilo</h4><p>Para ropa del día a día con entrega cómoda y atención rápida.</p></div>
-        </div>
-        <div class="card service">
-          <div class="service-icon">📦</div>
-          <div><h4>Lavado por encargo</h4><p>Atención especial para prendas o lotes que requieren trato personalizado.</p></div>
-        </div>
-        <div class="card service">
-          <div class="service-icon">🛏️</div>
-          <div><h4>Edredones y cobijas</h4><p>Lavado profundo para prendas voluminosas y blancos pesados.</p></div>
-        </div>
-        <div class="card service">
-          <div class="service-icon">🧺</div>
-          <div><h4>Sábanas y frazadas</h4><p>Limpieza fresca y completa para tu ropa de cama.</p></div>
-        </div>
-        <div class="card service">
-          <div class="service-icon">🧥</div>
-          <div><h4>Chamarras</h4><p>Lavado cuidadoso según el tipo de tela y uso de la prenda.</p></div>
-        </div>
-        <div class="card service">
-          <div class="service-icon">🧴</div>
-          <div><h4>Detergentes</h4><p>Distribución de detergentes para hogar y negocio.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="cobertura">
-      <div class="dark-card">
-        <h3>Zona de cobertura</h3>
-        <p style="margin-top:8px">Ixtlahuaca centro, terminal y hasta 5 km a la redonda para recolección y entrega de ropa.</p>
-      </div>
-    </section>
-
-    <section class="section" id="horarios">
-      <div class="card">
-        <h3>Horario de atención</h3>
-        <p style="margin-top:8px" class="muted">Disponible todos los días</p>
-        <p style="font-size:28px;font-weight:800;margin-top:12px">9:00 a 18:00</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <h3>Cómo funciona</h3>
-      <div class="steps">
-        <div class="card step"><div class="num">1</div><div>El cliente agenda desde su celular.</div></div>
-        <div class="card step"><div class="num">2</div><div>Ecozen recoge la ropa en domicilio.</div></div>
-        <div class="card step"><div class="num">3</div><div>Se lava con cuidado y se prepara el pedido.</div></div>
-        <div class="card step"><div class="num">4</div><div>La ropa limpia se entrega hasta su puerta.</div></div>
-      </div>
-    </section>
-
-    <section class="section" id="agenda">
-      <div class="card">
-        <h3>Agenda tu recolección</h3>
-        <p class="muted" style="margin-top:4px">Versión tipo app para hacer pedidos rápidos</p>
-
-        <form class="form stack" id="pickupForm">
-          <input name="nombre" placeholder="Nombre completo" required />
-          <input name="telefono" placeholder="Teléfono" required />
-          <input name="direccion" placeholder="Dirección completa" required />
-          <select name="servicio" required>
-            <option value="">Selecciona un servicio</option>
-            <option>Lavado por kilo</option>
-            <option>Lavado por encargo</option>
-            <option>Edredones y cobijas</option>
-            <option>Sábanas y frazadas</option>
-            <option>Chamarras</option>
-            <option>Detergentes</option>
-          </select>
-          <div class="row">
-            <input name="fecha" type="date" />
-            <input name="hora" type="time" />
+        <div class="tab-panel" id="tab-repartidor">
+          <div class="driver-grid stack">
+            <div class="soft-card">
+              <h3>Vista para repartidor</h3>
+              <p class="muted" style="margin-top:8px;line-height:1.55">Muestra solo pedidos que requieren movimiento físico: recolección, ruta o nuevas entradas por confirmar.</p>
+            </div>
+            <div class="chips" id="driverChips">
+              <button class="chip active" type="button" data-driver-filter="activos">Activos</button>
+              <button class="chip" type="button" data-driver-filter="nuevo">Nuevos</button>
+              <button class="chip" type="button" data-driver-filter="recoleccion">Recolección</button>
+              <button class="chip" type="button" data-driver-filter="ruta">En ruta</button>
+            </div>
+            <div id="driverList" class="orders-list"></div>
           </div>
-          <textarea name="notas" placeholder="Notas adicionales"></textarea>
-
-          <button type="submit" class="btn btn-primary">Confirmar solicitud por WhatsApp</button>
-          <a class="btn-outline wa" href="https://wa.me/527223652560?text=Hola,%20me%20gustar%C3%ADa%20solicitar%20su%20servicio%20de%20lavado">WhatsApp 722 365 2560</a>
-          <a class="btn-outline wa" href="https://wa.me/527226385227?text=Hola,%20me%20gustar%C3%ADa%20solicitar%20su%20servicio%20de%20lavado">WhatsApp 722 638 5227</a>
-        </form>
-      </div>
-    </section>
-
-    <section class="section" id="instalar">
-      <div class="dark-card">
-        <h3>Instalar Ecozen en tu celular</h3>
-        <div class="stack" style="margin-top:12px">
-          <div class="card" style="background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.08); color:#fff">1. Abre la página desde Chrome o Safari.</div>
-          <div class="card" style="background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.08); color:#fff">2. Toca “Agregar a pantalla de inicio”.</div>
-          <div class="card" style="background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.08); color:#fff">3. Usa Ecozen como si fuera una app.</div>
         </div>
       </div>
     </section>
+
+    <section class="section" id="detergentes">
+      <div class="section-head">
+        <h3>Detergentes disponibles</h3>
+        <p>Botón y catálogo útil para venta cruzada</p>
+      </div>
+      <div class="card" style="margin-bottom:12px">
+        <button id="toggleCatalogBtn" class="btn-soft" type="button">🧴 Mostrar detergentes disponibles</button>
+        <div class="helper" style="margin-top:8px">Puedes usar esta sección para mostrar inventario rápido al cliente o al repartidor.</div>
+      </div>
+      <div id="catalogSection" class="catalog-grid" hidden></div>
+    </section>
+
+    <section class="section" id="ayuda">
+      <div class="section-head">
+        <h3>Preguntas prácticas</h3>
+        <p>Lo que te conviene tener claro</p>
+      </div>
+      <div class="faq-list stack">
+        <details class="faq-item" open>
+          <summary>¿Esto ya sirve como backend?</summary>
+          <p>Sí, como backend ligero local. Guarda pedidos y estados en el dispositivo. Para compartir órdenes entre varios celulares, la siguiente etapa es sincronizar esta misma estructura con una base remota.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Mi hermano puede usar esta vista de repartidor?</summary>
+          <p>Sí, en este mismo celular o en un dispositivo donde exportes después la misma lógica con sincronización. La interfaz ya está separada para ese rol.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Qué sería lo siguiente para operar varios negocios?</summary>
+          <p>Agregar usuarios, autenticación simple y sincronización en tiempo real para que cada pedido quede visible desde cualquier teléfono.</p>
+        </details>
+      </div>
+    </section>
+
+    <div class="footer-space"></div>
 
     <div class="bottom">
-      <nav class="nav">
+      <nav class="nav" aria-label="Navegación inferior">
         <a href="#inicio" class="active">🏠<span>Inicio</span></a>
-        <a href="#servicios">🧴<span>Servicios</span></a>
-        <a href="#agenda">🚚<span>Agenda</span></a>
-        <a href="#horarios">⏰<span>Horario</span></a>
+        <a href="#operacion">📋<span>Operación</span></a>
+        <a href="#detergentes">🧴<span>Catálogo</span></a>
+        <a href="#ayuda">❓<span>Ayuda</span></a>
       </nav>
     </div>
   </div>
-
   <script src="app.js"></script>
 </body>
 </html>

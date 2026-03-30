@@ -1,8 +1,9 @@
 {
-  "name": "Ecozen",
+  "name": "Ecozen Operaciones",
   "short_name": "Ecozen",
-  "description": "Lavandería y distribuidora de detergentes. Agenda recolección y entrega a domicilio.",
+  "description": "Lavandería, registro de pedidos, modo repartidor y catálogo de detergentes.",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#10b981",
@@ -12,12 +13,14 @@
     {
       "src": "icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
